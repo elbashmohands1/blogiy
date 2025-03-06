@@ -16,6 +16,7 @@ export default async function Home() {
         ))}
         
       </ol>
+      <button className='rounded-full bg-blue-400 p-2 '>Go to Posts</button>
      
     </div>
   );
