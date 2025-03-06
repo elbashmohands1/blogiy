@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function Post({ params }: { params: Promise<{ id: string }> }) {
@@ -13,7 +14,10 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
   if (!post) {
     notFound();
   }
-
+const authorPosts = await prisma.post.findMany({
+  where: { authorId: post.authorId },
+ 
+});
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center -mt-16">
       <article className="max-w-2xl space-y-4 font-[family-name:var(--font-geist-sans)]">
@@ -28,6 +32,23 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
           {post.content || "No content available."}
         </div>
       </article>
+
+      <div>
+        related posts
+        <div className="grid grid-cols-3 gap-4">
+         {authorPosts.map((post)=>(
+
+          <Link href={`/posts/${post.id}`} key={post.id}>
+            <div className="p-4  bg-amber-200">
+            <h3 className="font-bold text-xl text-red-600">{post.title}</h3>
+            <p>{post.content}</p>
+          </div>
+            </Link>
+        
+        )).filter(p=> p.key !== id)
+        }
+        </div>
+      </div>
     </div>
   );
 }
