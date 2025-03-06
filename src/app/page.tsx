@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import Link from 'next/link';
 
 export default async function Home() {
   const users = await prisma.user.findMany();
@@ -16,7 +17,7 @@ export default async function Home() {
         ))}
         
       </ol>
-      <button className='rounded-full bg-blue-400 p-2 '>Go to Posts</button>
+      <Link href={"/posts"} className='rounded-full bg-blue-400 p-2 text-white'>Go to Posts</Link>
      
     </div>
   );
