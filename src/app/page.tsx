@@ -17,7 +17,7 @@ export default async function Home() {
         ))}
         
       </ol>
-      <Link href={"/posts"} className='rounded-full bg-blue-400 p-2 text-white'>Go to Posts</Link>
+      <Link href={"/posts"} className='rounded-full bg-red-400 p-2 text-white'>Go Posts</Link>
      
     </div>
   );
